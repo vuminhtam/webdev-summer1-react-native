@@ -74,6 +74,7 @@ const App = createStackNavigator({
     ModuleList,
     LessonList,
     TopicList,
+    AssignmentEditor,
     WidgetList,
     QuestionList,
     TrueFalseQuestionEditor,

@@ -26,6 +26,7 @@ export default class AssignmentEditor extends React.Component {
     updateForm(newState) {
         this.setState(newState)
     }
+
     render() {
         return(
             <ScrollView>

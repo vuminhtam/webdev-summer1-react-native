@@ -80,7 +80,6 @@ class WidgetList extends Component {
 
                 {/*{this.renderAll()}*/}
                 {this.renderAssignments()}
-
             </View>
         )
     }
@@ -96,7 +95,7 @@ class WidgetList extends Component {
         this.setState({topicId: topicId})
     }
 
-    renderAll() {
+    renderExams() {
         let list = null
         var self = this
         if(this.state) {
@@ -108,7 +107,8 @@ class WidgetList extends Component {
                                 .navigate("QuestionList", {examId: widget.id})}
                             key={index}
                             subtitle={widget.description}
-                            title={widget.title}/>)
+                            title={widget.title}/>
+                    )
                 }
             )
         }
@@ -117,7 +117,7 @@ class WidgetList extends Component {
 
     renderAssignments() {
         if(this.state.topicId != '') {
-            return <AssignmentList id={this.state.topicId}/>
+            return <AssignmentList id={this.state.topicId} navigation={this.props.navigation}/>
         }
     }
 
