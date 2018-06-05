@@ -73,7 +73,9 @@ export default class ExamList extends Component {
                                 .navigate("QuestionList", {examId: widget.id})}
                             key={index}
                             subtitle={widget.description}
-                            title={widget.title}/>
+                            title={widget.title}
+                            rightIcon={<Icon
+                                name='cross' />}/>
                     )
                 }
             )
