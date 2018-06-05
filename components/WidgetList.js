@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
-import {View, ScrollView, Alert, Switch} from 'react-native'
-import {Text, ListItem, Divider, ButtonGroup} from 'react-native-elements'
+import { ScrollView} from 'react-native'
+import { ListItem, ButtonGroup} from 'react-native-elements'
 import {Icon} from 'react-native-elements'
 import AssignmentService from "../services/AssignmentService";
-import FontAwesome, { Icons } from 'react-native-fontawesome';
-import AssignmentList from "./AssignmentList";
-import Tabs from 'react-native-tabs';
-import ExamList from "./ExamList";
+import ExamService from "../services/ExamService";
 
 
 
@@ -23,7 +20,7 @@ class WidgetList extends Component {
             moduleId: '',
             topicId: ''
         }
-        this.buttons = ['Assignments', 'Exams', 'View All']
+        this.buttons = ['Assignments', 'Exams']
         this.mode = ['assignment', 'exam', 'widget']
         this.navElement = ['AssignmentEditor', 'QuestionList']
         this.updateIndex = this.updateIndex.bind(this)
@@ -33,7 +30,6 @@ class WidgetList extends Component {
         const {navigation} = this.props;
         const topicId = navigation.getParam("lessonId")
         this.setParams(topicId)
-        //this.findWidgets(topicId)
         this.findWidgetsByMode(topicId)
     }
 
@@ -68,21 +64,21 @@ class WidgetList extends Component {
 
                 {this.renderWidgets()}
 
+                <Icon
+                    raised
+                    color='#f50'
+                    name='plus'
+                    type='font-awesome'
+                    onPress={() => this.addWidgetToTopic()}
+                />
+
             </ScrollView>
         )
-    }
-
-    findWidgets(topicId) {
-        const url = "http://localhost:8080/api/topic/" + topicId + "/assignment"
-        fetch(url)
-            .then(response => (response.json()))
-            .then(widgets => this.setState({widgets: widgets}))
     }
 
     findWidgetsByMode(topicId) {
         const mode = this.getMode()
         const url = "http://localhost:8080/api/topic/" + topicId + "/" + mode
-        console.log(mode)
         fetch(url)
             .then(response => (response.json()))
             .then(widgets => this.setState({widgets: widgets}))
@@ -93,15 +89,6 @@ class WidgetList extends Component {
     }
 
     renderWidgets() {
-        // {this.state.widgets.map(
-        //     (widget, index) => (
-        //         <ListItem
-        //             // onPress={() => this.props.navigation
-        //             //     .navigate("QuestionList", {examId: widget.id})}
-        //             onPress={() => this.getNavigateOnMode(widget)}
-        //             key={index}
-        //             subtitle={widget.description}
-        //             title={widget.title}/>))}
 
         let list = null
         var self = this
@@ -133,12 +120,6 @@ class WidgetList extends Component {
     }
 
     getNavigateOnMode(widget) {
-        // if(this.state.selectedIndex === 2) {
-        //     console.log('hello')
-        // }
-        // else {
-        //     this.props.navigation.navigate(this.navElement[this.state.selectedIndex], {id: widget.id})
-        // }
         switch (this.buttons[this.state.selectedIndex]) {
             case 'Assignments': return this.props.navigation.navigate("AssignmentEditor", {id: widget.id})
             case 'Exams': return this.props.navigation.navigate("QuestionList", {examId: widget.id})
@@ -146,17 +127,28 @@ class WidgetList extends Component {
         }
     }
 
-    // renderExams() {
-    //     if(this.state.topicId != '') {
-    //         return <ExamList id={this.state.topicId} navigation={this.props.navigation}/>
-    //     }
-    // }
-    //
-    // renderAssignments() {
-    //     if(this.state.topicId != '') {
-    //         return <AssignmentList id={this.state.topicId} navigation={this.props.navigation}/>
-    //     }
-    // }
+    addWidgetToTopic() {
+        this.getServiceByMode()
+            .addByTopic(this.state.topicId,
+                this.createNewWidgetObject())
+            .then(() => this.findWidgets(this.state.topicId))
+    }
+
+    getServiceByMode() {
+        switch (this.buttons[this.state.selectedIndex]) {
+            case 'Assignments': return AssignmentService.instance;
+            case 'Exams': return ExamService.instance;
+            default: return AssignmentService.instance
+        }
+    }
+
+    createNewWidgetObject() {
+        switch (this.buttons[this.state.selectedIndex]) {
+            case 'Assignments': return {title: 'new assignment', description: 'description', score: '0'};
+            case 'Exams': return {title: 'new quiz', description: 'description for exam'};
+            default: return {title: 'new widget'}
+        }
+    }
 
 }
 
