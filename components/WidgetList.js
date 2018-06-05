@@ -1,25 +1,13 @@
 import React, {Component} from 'react'
 import {View, Alert} from 'react-native'
-import {Text, ListItem} from 'react-native-elements'
-import Collapsible from 'react-native-collapsible';
-import Accordion from 'react-native-collapsible/Accordion';
+import {Text, ListItem, Divider} from 'react-native-elements'
 import {Icon} from 'react-native-elements'
 import AssignmentService from "../services/AssignmentService";
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import AssignmentList from "./AssignmentList";
+import Tabs from 'react-native-tabs';
+import ExamList from "./ExamList";
 
-const SECTIONS = [
-    {
-        title: 'Assignments',
-        content: 'Assignment list'
-    },
-    {
-        title: 'Exams',
-        content: 'Exam list'
-    }
-];
-
-const styles = {content: {}, header: {}}
 
 class WidgetList extends Component {
     static navigationOptions = {title: 'Widgets'}
@@ -32,7 +20,6 @@ class WidgetList extends Component {
             moduleId: '',
             topicId: ''
         }
-        this.assignmentService = AssignmentService.instance
     }
 
 
@@ -43,43 +30,23 @@ class WidgetList extends Component {
         this.findWidgets(topicId)
     }
 
-    //
-    // _renderSectionTitle(section) {
-    //     return (
-    //         <View style={styles.content}>
-    //             <Text>{section.content}</Text>
-    //         </View>
-    //     );
-    // }
-    //
-    // _renderHeader(section) {
-    //     return (
-    //         <View style={styles.header}>
-    //             <Text style={styles.headerText}>{section.title}</Text>
-    //         </View>
-    //     );
-    // }
-    //
-    // _renderContent(section) {
-    //     return (
-    //         <View style={styles.content}>
-    //             <Text>{section.content}</Text>
-    //         </View>
-    //     );
-    // }
-
     render() {
         return (
             <View style={{padding: 15}}>
-                {/*<Accordion*/}
-                {/*sections={SECTIONS}*/}
-                {/*renderSectionTitle={this._renderSectionTitle}*/}
-                {/*renderHeader={this._renderHeader}*/}
-                {/*renderContent={this._renderContent}*/}
-                {/*/>*/}
 
-                {/*{this.renderAll()}*/}
+                {/*<Tabs selected={'assignments'} style={{backgroundColor:'white'}}*/}
+                      {/*selectedStyle={{color:'red'}}>*/}
+                    {/*<Text name="assignments">Assignments</Text>*/}
+                    {/*<Text name="exams" selectedIconStyle={{borderTopWidth:2,borderTopColor:'red'}}>Exams</Text>*/}
+                    {/*<Text name="others" selectedIconStyle={{borderTopWidth:2,borderTopColor:'red'}}>Others</Text>*/}
+                {/*</Tabs>*/}
+
                 {this.renderAssignments()}
+                <Divider style={{
+                    backgroundColor:
+                        'grey', padding: 10}}/>
+                {this.renderExams()}
+
             </View>
         )
     }
@@ -96,23 +63,9 @@ class WidgetList extends Component {
     }
 
     renderExams() {
-        let list = null
-        var self = this
-        if(this.state) {
-            list = this.state.widgets.map(
-                function (widget, index) {
-                    return (
-                        <ListItem
-                            onPress={() => self.props.navigation
-                                .navigate("QuestionList", {examId: widget.id})}
-                            key={index}
-                            subtitle={widget.description}
-                            title={widget.title}/>
-                    )
-                }
-            )
+        if(this.state.topicId != '') {
+            return <ExamList id={this.state.topicId} navigation={this.props.navigation}/>
         }
-        return list
     }
 
     renderAssignments() {

@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import {View, Alert} from 'react-native'
+import {View,ScrollView, Alert} from 'react-native'
 import {Text, ListItem} from 'react-native-elements'
 import { Icon } from 'react-native-elements'
 import AssignmentService from "../services/AssignmentService";
+import ExamService from "../services/ExamService";
 
 export default class ExamList extends Component {
     static navigationOptions = {title: 'Exams'}
@@ -15,89 +16,76 @@ export default class ExamList extends Component {
             moduleId: '',
             topicId: ''
         }
-        this.assignmentService = AssignmentService.instance
-        this.addAssignmentToTopic = this.addAssignmentToTopic.bind(this)
+        this.examService = ExamService.instance
+        this.addExamToTopic = this.addExamToTopic.bind(this)
     }
 
 
     componentDidMount() {
-        this.findWidgets()
+        const topicId = this.props.id
+        this.setParams(topicId)
+        this.findWidgets(topicId)
     }
-
-    //
-    // _renderSectionTitle(section) {
-    //     return (
-    //         <View style={styles.content}>
-    //             <Text>{section.content}</Text>
-    //         </View>
-    //     );
-    // }
-    //
-    // _renderHeader(section) {
-    //     return (
-    //         <View style={styles.header}>
-    //             <Text style={styles.headerText}>{section.title}</Text>
-    //         </View>
-    //     );
-    // }
-    //
-    // _renderContent(section) {
-    //     return (
-    //         <View style={styles.content}>
-    //             <Text>{section.content}</Text>
-    //         </View>
-    //     );
-    // }
 
     render() {
         return (
-            <View style={{padding: 15}}>
+            <ScrollView style={{padding: 15}}>
                 {this.renderAll()}
 
                 <Icon
                     raised
                     color='#f50'
-                    name='heartbeat'
+                    name='plus'
                     type='font-awesome'
-                    onPress={() => this.addAssignmentToTopic()}
+                    onPress={() => this.addExamToTopic()}
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 
-    findWidgets() {
-        alert('finding')
-        const {navigation} = this.props;
-        const topicId = navigation.getParam("lessonId")
-        const url = "http://localhost:8080/api/topic/" + topicId + "/widget"
+    findWidgets(topicId) {
+        // const {navigation} = this.props;
+        // const topicId = navigation.getParam("lessonId")
+        // const url = "http://localhost:8080/api/topic/" + topicId + "/widget"
+        // fetch(url)
+        //     .then(response => (response.json()))
+        //     .then(widgets => this.setState({widgets: widgets}))
+        const url = "http://localhost:8080/api/topic/" + topicId + "/exam"
         fetch(url)
             .then(response => (response.json()))
             .then(widgets => this.setState({widgets: widgets}))
     }
 
-    renderAll() {
-        console.log('render')
-        var self = this
-        this.state.widgets.map(
-            function(widget, index) {
-                return (
-                    <ListItem
-                        onPress={() => self.props.navigation
-                            .navigate("QuestionList", {examId: widget.id})}
-                        key={index}
-                        subtitle={widget.description}
-                        title={widget.title}/>)
-            }
-        )
+    setParams(topicId) {
+        this.setState({topicId: topicId})
     }
 
-    addAssignmentToTopic() {
-        alert('added')
-        this.assignmentService.addByTopic(
-            this.state.topicId,
-            {title: 'title1', description: 'description', score: '0'})
-        this.renderAll()
+    renderAll() {
+        let list = null
+        var self = this
+        if(this.state) {
+            list = this.state.widgets.map(
+                function (widget, index) {
+                    return (
+                        <ListItem
+                            onPress={() => self.props.navigation
+                                .navigate("QuestionList", {examId: widget.id})}
+                            key={index}
+                            subtitle={widget.description}
+                            title={widget.title}/>
+                    )
+                }
+            )
+        }
+        return list
+    }
+
+    addExamToTopic() {
+        this.examService
+            .addByTopic(this.state.topicId,
+                {title: 'new quiz', description: 'description for exam'})
+            .then(() => this.findWidgets(this.state.topicId))
     }
 }
 
