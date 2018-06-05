@@ -26,8 +26,9 @@ class ModuleList extends Component {
         {this.state.modules.map((module, index) => (
           <ListItem
             onPress={() => this.props.navigation
-              .navigate("LessonList", {courseId:
-                this.state.courseId, moduleId: module.id})}
+              .navigate("LessonList", {
+                courseId: this.state.courseId,
+                  moduleId: module.id})}
             key={index}
             title={module.title}/>
         ))}

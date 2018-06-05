@@ -1,19 +1,13 @@
 import React from 'react'
 import {Picker, Text, View} from 'react-native'
 
-export default class QuestionTypePicker extends React.Component {
+class QuestionTypePicker extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       questionType: 0
     }
-    this.setQuestionType = this.setQuestionType.bind(this)
   }
-
-  setQuestionType(itemValue, itemIndex) {
-      this.setState({questionType: itemValue})
-  }
-
   render() {
     return (
       <View>
@@ -31,3 +25,5 @@ export default class QuestionTypePicker extends React.Component {
     )
   }
 }
+
+export default QuestionTypePicker

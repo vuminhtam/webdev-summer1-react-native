@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Alert } from 'react-native'
 import { Icon } from 'react-native-elements'
-export const Icons = () => (
+const Icons = () => (
   <View>
     <Icon
       reverse
