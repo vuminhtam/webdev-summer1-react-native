@@ -46,19 +46,19 @@ export default class ExamList extends Component {
 
     findWidgets(topicId) {
         // const {navigation} = this.props;
-        // const topicId = navigation.getParam("lessonId")
-        // const url = "http://localhost:8080/api/topic/" + topicId + "/widget"
+        // const examId = navigation.getParam("lessonId")
+        // const url = "http://localhost:8080/api/topic/" + examId + "/widget"
         // fetch(url)
         //     .then(response => (response.json()))
-        //     .then(widgets => this.setState({widgets: widgets}))
+        //     .then(questions => this.setState({questions: questions}))
         const url = "http://localhost:8080/api/topic/" + topicId + "/exam"
         fetch(url)
             .then(response => (response.json()))
-            .then(widgets => this.setState({widgets: widgets}))
+            .then(widgets => this.setState({questions: widgets}))
     }
 
     setParams(topicId) {
-        this.setState({topicId: topicId})
+        this.setState({examId: topicId})
     }
 
     renderAll() {

@@ -43,11 +43,11 @@ class AssignmentList extends Component {
 
     findWidgets(topicId) {
         this.assignmentService.findAllAssignmentsByTopic(topicId)
-            .then(widgets => this.setState({widgets: widgets}))
+            .then(widgets => this.setState({questions: widgets}))
     }
 
     setParams(topicId) {
-        this.setState({topicId: topicId})
+        this.setState({examId: topicId})
     }
 
     renderAll() {

@@ -10,7 +10,6 @@ import WidgetService from "../services/WidgetService";
 class WidgetList extends Component {
     static navigationOptions = {title: 'Widgets'}
 
-
     constructor(props) {
         super(props)
         this.state = {
@@ -22,7 +21,7 @@ class WidgetList extends Component {
         }
         this.buttons = ['Assignments', 'Exams']
         this.mode = ['assignment', 'exam', 'widget']
-        this.navElement = ['AssignmentEditor', 'QuestionList']
+        this.navElement = ['AssignmentEditor', 'ExamWidget']
         this.widgetService = WidgetService.instance
         this.updateIndex = this.updateIndex.bind(this)
     }
@@ -35,7 +34,7 @@ class WidgetList extends Component {
     }
 
     setParams(topicId) {
-        this.setState({topicId: topicId})
+        this.setState({examId: topicId})
     }
 
     updateIndex(selectedIndex) {
@@ -71,10 +70,10 @@ class WidgetList extends Component {
     findWidgetsByMode(topicId) {
         // const mode = this.getMode()
         this.getServiceByMode().findAllByTopic(topicId)
-        // const url = "http://localhost:8080/api/topic/" + topicId + "/" + mode
+        // const url = "http://localhost:8080/api/topic/" + examId + "/" + mode
         // fetch(url)
         //     .then(response => (response.json()))
-            .then(widgets => this.setState({widgets: widgets}))
+            .then(widgets => this.setState({questions: widgets}))
     }
 
 

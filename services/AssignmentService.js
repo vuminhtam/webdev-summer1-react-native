@@ -41,13 +41,4 @@ class AssignmentService {
                 'content-type': 'application/json'}
         }).then(() => alert('Added new assignment!'))
     }
-
-    saveAssignment(assignment) {
-        return fetch(TOPIC_ASSIGNMENT_API, {
-            method: 'post',
-            body: JSON.stringify(assignment),
-            headers: {
-                'content-type': 'application/json'}
-        }).then(() => alert('Changes saved!'))
-    }
 }

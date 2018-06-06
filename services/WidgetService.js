@@ -30,16 +30,16 @@ class WidgetService {
             .then(response => (response.json()))
     }
 
-    save(overrideList) {
-        return fetch(WIDGET_API + '/save', {
+    saveWidgetById(wid, widget) {
+        return fetch(WIDGET_API + '/' + wid, {
             method: 'post',
-            body: JSON.stringify(overrideList),
+            body: JSON.stringify(widget),
             headers: {
                 'content-type': 'application/json'}
         }).then(() => alert('Changes saved!'))
     }
 
-    deleteById(id) {
+    deleteWidgetById(id) {
         return fetch(WIDGET_API + '/' + id, {method: 'DELETE'})
             .then(response => (response.json()))
     }

@@ -18,7 +18,7 @@ export default class ExamService {
         return this[_singleton]
     }
 
-    findAllAssignments() {
+    findAll() {
         return fetch(EXAM_API)
             .then(response => (response.json()))
     }
@@ -38,14 +38,5 @@ export default class ExamService {
             headers: {
                 'content-type': 'application/json'}
         }).then(() => alert('Added new exam!'))
-    }
-
-    saveAssignment(assignment) {
-        return fetch(EXAM_TOPIC_API, {
-            method: 'post',
-            body: JSON.stringify(assignment),
-            headers: {
-                'content-type': 'application/json'}
-        }).then(() => alert('Changes saved!'))
     }
 }
