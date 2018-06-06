@@ -7,7 +7,6 @@ import AssignmentEditor from './elements/AssignmentEditor'
 
 import { createStackNavigator } from 'react-navigation'
 import {Button} from 'react-native-elements'
-import ScreenX from './elements/ScreenX'
 import CourseList from './components/CourseList'
 import ModuleList from './components/ModuleList'
 import LessonList from './components/LessonList'
@@ -42,30 +41,6 @@ class Home extends React.Component {
         )
     }
 }
-
-class ScreenA extends React.Component {
-    static navigationOptions = {title: "Screen A"}
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <View>
-                <Text h1>Screen A</Text>
-                <Button title="Go Home"
-                        onPress={() =>this.props
-                            .navigation
-                            .goBack()} />
-            </View>
-        )
-    }
-}
-
-const ScreenB = () => (
-    <View>
-        <Text h1>Screen B</Text>
-    </View>
-)
 
 const App = createStackNavigator({
     Home,
