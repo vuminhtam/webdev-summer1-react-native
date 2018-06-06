@@ -29,7 +29,6 @@ class Home extends React.Component {
     render() {
         return(
             <ScrollView>
-                <EssayQuestionEditor/>
                 <StatusBar barStyle="light-content"/>
                 <FixedHeader/>
                 <Button title="Topics"
@@ -55,7 +54,8 @@ const App = createStackNavigator({
     TrueFalseQuestionEditor,
     MultipleChoiceQuestionEditor,
     FillInBlanksQuestionEditor,
-    BaseQuestionEditor
+    BaseQuestionEditor,
+    EssayQuestionEditor
 });
 
 export default App;

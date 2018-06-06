@@ -10,7 +10,7 @@ export default class EssayQuestionEditor extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            questionId: '22',
+            questionId: '',
             info: '',
             title: '',
             description: '',
@@ -21,11 +21,11 @@ export default class EssayQuestionEditor extends React.Component {
     }
 
     componentDidMount() {
-        // const {navigation} = this.props;
-        // const questionId = navigation.getParam("questionId")
-        // this.setParams(questionId)
-        const questionId = this.state.questionId
-        console.log(questionId)
+        const {navigation} = this.props;
+        const questionId = navigation.getParam("questionId")
+        this.setParams(questionId)
+        // const questionId = this.state.questionId
+        // console.log(questionId)
         this.questionService.findQuestionById(questionId)
             .then(question => this.setQuestionInfo(question))
     }
@@ -82,7 +82,8 @@ export default class EssayQuestionEditor extends React.Component {
                            onPress={() => this.save()}/>
                 <Button	backgroundColor="red"
                            color="white"
-                           title="Cancel"/>
+                           title="Cancel"
+                           onPress={() => this.props.navigation.goBack()}/>
 
                 <Text h3>Preview</Text>
                 <Text h2>{this.state.title}</Text>
