@@ -44,4 +44,9 @@ export default class QuestionService {
                 'content-type': 'application/json'}
         }).then((response) => console.log(response))
     }
+
+    deleteById(id) {
+        return fetch(QUESTION_API + '/' + id, {method: 'DELETE'})
+            .then(response => (response.json()))
+    }
 }
