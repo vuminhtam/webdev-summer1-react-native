@@ -23,7 +23,7 @@ export default class ExamService {
             .then(response => (response.json()))
     }
 
-    findAllAssignmentsByTopic(tid) {
+    findAllByTopic(tid) {
         return fetch(EXAM_TOPIC_API.replace('TID', tid))
             .then(response => (response.json()))
     }

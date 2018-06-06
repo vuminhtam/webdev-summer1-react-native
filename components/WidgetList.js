@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import { ScrollView} from 'react-native'
-import { ListItem, ButtonGroup} from 'react-native-elements'
+import {ScrollView} from 'react-native'
+import {ListItem, ButtonGroup} from 'react-native-elements'
 import {Icon} from 'react-native-elements'
 import AssignmentService from "../services/AssignmentService";
 import ExamService from "../services/ExamService";
-
+import WidgetService from "../services/WidgetService";
 
 
 class WidgetList extends Component {
@@ -23,17 +23,22 @@ class WidgetList extends Component {
         this.buttons = ['Assignments', 'Exams']
         this.mode = ['assignment', 'exam', 'widget']
         this.navElement = ['AssignmentEditor', 'QuestionList']
+        this.widgetService = WidgetService.instance
         this.updateIndex = this.updateIndex.bind(this)
     }
 
-        componentDidMount() {
+    componentDidMount() {
         const {navigation} = this.props;
         const topicId = navigation.getParam("lessonId")
         this.setParams(topicId)
         this.findWidgetsByMode(topicId)
     }
 
-    updateIndex (selectedIndex) {
+    setParams(topicId) {
+        this.setState({topicId: topicId})
+    }
+
+    updateIndex(selectedIndex) {
         this.setState({selectedIndex: selectedIndex})
         this.findWidgetsByMode(this.state.topicId)
     }
@@ -41,19 +46,6 @@ class WidgetList extends Component {
     render() {
         return (
             <ScrollView style={{padding: 15}}>
-
-                {/*<Tabs selected={'assignments'} style={{backgroundColor:'white'}}*/}
-                      {/*selectedStyle={{color:'red'}}>*/}
-                    {/*<Text name="assignments">Assignments</Text>*/}
-                    {/*<Text name="exams" selectedIconStyle={{borderTopWidth:2,borderTopColor:'red'}}>Exams</Text>*/}
-                    {/*<Text name="others" selectedIconStyle={{borderTopWidth:2,borderTopColor:'red'}}>Others</Text>*/}
-                {/*</Tabs>*/}
-
-                {/*{this.renderAssignments()}*/}
-                {/*<Divider style={{*/}
-                    {/*backgroundColor:*/}
-                        {/*'grey', padding: 10}}/>*/}
-                {/*{this.renderExams()}*/}
 
                 <ButtonGroup
                     onPress={this.updateIndex}
@@ -77,32 +69,34 @@ class WidgetList extends Component {
     }
 
     findWidgetsByMode(topicId) {
-        const mode = this.getMode()
-        const url = "http://localhost:8080/api/topic/" + topicId + "/" + mode
-        fetch(url)
-            .then(response => (response.json()))
+        // const mode = this.getMode()
+        this.getServiceByMode().findAllByTopic(topicId)
+        // const url = "http://localhost:8080/api/topic/" + topicId + "/" + mode
+        // fetch(url)
+        //     .then(response => (response.json()))
             .then(widgets => this.setState({widgets: widgets}))
     }
 
-    setParams(topicId) {
-        this.setState({topicId: topicId})
-    }
 
     renderWidgets() {
-
         let list = null
         var self = this
-        if(this.state) {
+        if (this.state) {
             list = this.state.widgets.map(
                 function (widget, index) {
                     return (
-                        <ListItem
-                            onPress={() => self.getNavigateOnMode(widget)}
-                            key={index}
-                            subtitle={widget.description}
-                            title={widget.title}
-                            rightIcon={<Icon
-                                name='cross' />}/>
+                            <ListItem
+                                onPress={() => self.getNavigateOnMode(widget)}
+                                key={index}
+                                subtitle={widget.description}
+                                title={widget.title}
+                                rightIcon={<Icon
+                                    name='close'
+                                    type='font-awesome'
+                                    color='#517fa4'
+                                    onPress={() => self.deleteWidget(widget)}
+                                />}
+                            />
                     )
                 }
             )
@@ -110,20 +104,32 @@ class WidgetList extends Component {
         return list
     }
 
+    deleteWidget(widget) {
+        this.widgetService.deleteById(widget.id)
+            .then(() => this.findWidgets(this.state.topicId))
+        alert('refresh')
+    }
+
     getMode() {
-        console.log('seleting ' + this.state.selectedIndex)
         switch (this.buttons[this.state.selectedIndex]) {
-            case 'Assignments': return 'assignment'
-            case 'Exams': return 'exam'
-            default: return 'widget'
+            case 'Assignments':
+                return 'assignment'
+            case 'Exams':
+                return 'exam'
+            default:
+                return 'widget'
         }
     }
 
     getNavigateOnMode(widget) {
+        var navEle = this.navElement[this.state.selectedIndex]
         switch (this.buttons[this.state.selectedIndex]) {
-            case 'Assignments': return this.props.navigation.navigate("AssignmentEditor", {id: widget.id})
-            case 'Exams': return this.props.navigation.navigate("QuestionList", {examId: widget.id})
-            default: return
+            case 'Assignments':
+                return this.props.navigation.navigate(navEle, {id: widget.id})
+            case 'Exams':
+                return this.props.navigation.navigate(navEle, {examId: widget.id})
+            default:
+                return
         }
     }
 
@@ -136,17 +142,23 @@ class WidgetList extends Component {
 
     getServiceByMode() {
         switch (this.buttons[this.state.selectedIndex]) {
-            case 'Assignments': return AssignmentService.instance;
-            case 'Exams': return ExamService.instance;
-            default: return AssignmentService.instance
+            case 'Assignments':
+                return AssignmentService.instance;
+            case 'Exams':
+                return ExamService.instance;
+            default:
+                return AssignmentService.instance
         }
     }
 
     createNewWidgetObject() {
         switch (this.buttons[this.state.selectedIndex]) {
-            case 'Assignments': return {title: 'new assignment', description: 'description', score: '0'};
-            case 'Exams': return {title: 'new quiz', description: 'description for exam'};
-            default: return {title: 'new widget'}
+            case 'Assignments':
+                return {title: 'new assignment', description: 'description', score: '0'};
+            case 'Exams':
+                return {title: 'new quiz', description: 'description for exam'};
+            default:
+                return {title: 'new widget'}
         }
     }
 

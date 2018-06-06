@@ -24,7 +24,7 @@ class AssignmentService {
             .then(response => (response.json()))
     }
 
-    findAllAssignmentsByTopic(tid) {
+    findAllByTopic(tid) {
         return fetch(TOPIC_ASSIGNMENT_API.replace('TID', tid))
             .then(response => (response.json()))
     }
