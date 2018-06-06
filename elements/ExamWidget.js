@@ -146,7 +146,7 @@ export default class ExamWidget extends Component {
                 return {type: this.getMode(), title: 'new multiple choice question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
                     options: 'sampleOption', correctOption: 0};
             case BLANK:
-                return {type: this.getMode(), title: 'new multiple choice question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
+                return {type: this.getMode(), title: 'new fill-in-blank question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
                     variables: 'sampleBlankAnswer=1'};
             default:
                 return {type: this.getMode(), title: 'new base question'}
