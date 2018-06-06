@@ -14,8 +14,8 @@ import LessonList from './components/LessonList'
 import WidgetList from './components/WidgetList'
 import TopicList from './components/TopicList'
 import ExamWidget from './elements/ExamWidget'
-import EssayQuestionEditor from './elements/EssayQuestionEditor'
 import FillInBlanksQuestionEditor from './elements/FillInBlanksQuestionEditor'
+import BaseQuestionEditor from './elements/BaseQuestionEditor'
 
 
 
@@ -29,6 +29,8 @@ class Home extends React.Component {
     render() {
         return(
             <ScrollView>
+                <BaseQuestionEditor/>
+
                 <StatusBar barStyle="light-content"/>
                 <FixedHeader/>
                 <Button title="Topics"
@@ -77,8 +79,8 @@ const App = createStackNavigator({
     ExamWidget,
     TrueFalseQuestionEditor,
     MultipleChoiceQuestionEditor,
-    EssayQuestionEditor,
-    FillInBlanksQuestionEditor
+    FillInBlanksQuestionEditor,
+    BaseQuestionEditor
 });
 
 export default App;

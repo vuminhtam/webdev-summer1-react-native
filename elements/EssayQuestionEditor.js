@@ -15,6 +15,14 @@ export default class EssayQuestionEditor extends React.Component {
             options: ''
         }
     }
+
+    componentDidMount() {
+        const {navigation} = this.props;
+        const question = navigation.getParam("question")
+        this.setParams(eid)
+        this.findQuestionsByType(eid)
+    }
+
     updateForm(newState) {
         this.setState(newState)
     }

@@ -29,24 +29,37 @@ export default class QuestionService {
     }
 
     findAllByExamByType(examId, type) {
-        console.log(EXAM_QUESTION_API.replace('EID', examId) + '/' + type)
         return fetch(EXAM_QUESTION_API.replace('EID', examId) + '/' + type)
             .then(response => (response.json()))
     }
 
     addByExam(eid, question, type) {
-        console.log('adding ' + type + ' to ' + ' exam' + eid)
-        console.log(question)
         return fetch(EXAM_QUESTION_API.replace('EID', eid) + '/' + type, {
             method: 'post',
             body: JSON.stringify(question),
             headers: {
                 'content-type': 'application/json'}
-        }).then((response) => console.log(response))
+        }).then((response) => alert('Added!'))
     }
 
     deleteById(id) {
         return fetch(QUESTION_API + '/' + id, {method: 'DELETE'})
             .then(response => (response.json()))
+    }
+
+    findQuestionById(id) {
+        console.log(id)
+        return fetch(QUESTION_API + '/' + id)
+            .then(response => (response.json()))
+    }
+
+    updateQuestionById(eid, newQuestion) {
+        console.log(newQuestion)
+        return fetch(EXAM_QUESTION_API.replace('EID', eid) + '/' + newQuestion.type + '/' + newQuestion.id, {
+            method: 'post',
+            body: JSON.stringify(newQuestion),
+            headers: {
+                'content-type': 'application/json'}
+        }).then((response) => (response.json()))
     }
 }

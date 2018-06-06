@@ -35,6 +35,7 @@ export default class ExamWidget extends Component {
             'TrueFalseQuestionEditor',
             'MultipleChoiceQuestionEditor',
             'FillInBlanksQuestionEditor']
+        this.questionEditor = 'BaseQuestionEditor'
         this.questionService = QuestionService.instance
         this.updateIndex = this.updateIndex.bind(this)
     }
@@ -123,15 +124,15 @@ export default class ExamWidget extends Component {
     }
 
     navigateToQuestionByType(question) {
-        var navEle = this.navElement[this.state.selectedIndex]
-        console.log(navEle)
+        //var navEle = this.navElement[this.state.selectedIndex]
+        var navEle = this.questionEditor
         return this.props.navigation.navigate(navEle, {questionId: question.id})
     }
 
     addQuestionToExam() {
         this.questionService
             .addByExam(this.state.examId, this.createNewWidgetObject(), this.getMode())
-            .then(() => this.findWidgets(this.state.examId))
+            .then(() => this.findQuestionsByType(this.state.examId))
     }
 
     createNewWidgetObject() {
