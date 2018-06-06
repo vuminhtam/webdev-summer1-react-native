@@ -1,34 +1,34 @@
 import React from 'react'
-import {View, TextInput} from 'react-native'
-import {Text, Button, CheckBox} from 'react-native-elements'
+import {ScrollView, TextInput} from 'react-native'
+import {Text, Button, CheckBox, ListItem, Icon} from 'react-native-elements'
 import {FormLabel, FormInput, FormValidationMessage}
     from 'react-native-elements'
 import QuestionService from "../services/QuestionService";
-import {TRUEFALSE} from "./ExamWidget";
+import {MC, TRUEFALSE} from "./ExamWidget";
 
 export default class MultipleChoiceQuestionEditor extends React.Component {
     static navigationOptions = { title: "Multiple-Choice Question Editor"}
     constructor(props) {
         super(props)
         this.state = {
+            currentOption: 'content of new option goes here',
             questionId: '',
             info: '',
             title: '',
             description: '',
             points: '',
-            isTrue: true
+            options: []
         }
 
         this.questionService = QuestionService.instance
+        this.deleteOption = this.deleteOption.bind(this)
     }
 
     componentDidMount() {
         const {navigation} = this.props;
         const questionId = navigation.getParam("questionId")
         this.setParams(questionId)
-        // const questionId = this.state.questionId
-        // console.log(questionId)
-        this.questionService.findQuestionByTypeAndId(questionId, TRUEFALSE)
+        this.questionService.findQuestionByTypeAndId(questionId, MC)
             .then(question => this.setQuestionInfo(question))
     }
 
@@ -40,7 +40,29 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
             title: question.title,
             description: question.description,
             points: question.points,
-            isTrue: question.true})
+            options: this.formatStringToChoices(question.options)})
+    }
+
+    formatStringToChoices(text) {
+        text = "" + text
+        return text.split("\n")
+    }
+
+    convertOptionsToString(options) {
+        console.log(options)
+        var str = ""
+        var count = 0
+        options.map(option => {
+            if(count != 0) {
+                str = str + "\n"
+            }
+            else {
+                count++
+            }
+            str = str + option
+        })
+        console.log(str)
+        return str
     }
 
     setParams(id) {
@@ -50,9 +72,43 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
     updateForm(newState) {
         this.setState(newState)
     }
+
+    addOption() {
+        console.log('adding new')
+        var newState = [...this.state.options, this.state.currentOption]
+        this.updateForm({options: newState})
+    }
+
+    deleteOption(delOpt) {
+        var newState = this.state.options.filter((option, index) => {
+            return (index !== delOpt)
+        })
+        this.updateForm({options: newState})
+    }
+
+    renderOptions() {
+        var self = this
+        return this.state.options.map(
+            function (option, index) {
+                return (
+                    <ListItem
+                        key={index}
+                        title={option}
+                        rightIcon={<Icon
+                            name='close'
+                            type='font-awesome'
+                            color='#517fa4'
+                            onPress={() => self.deleteOption(index)}
+                        />}
+                    />
+                )
+            }
+        )
+    }
+
     render() {
         return(
-            <View>
+            <ScrollView>
                 <Text h3>{this.state.questionId}</Text>
                 <FormLabel>Title</FormLabel>
                 <FormInput
@@ -84,8 +140,20 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
                     Description is required
                 </FormValidationMessage>
 
-                <CheckBox onPress={() => this.updateForm({isTrue: !this.state.isTrue})}
-                          checked={this.state.isTrue} title='Checked if the answer is true'/>
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1,
+                        backgroundColor: 'yellow'}}
+                    defaultValue={this.state.currentOption}
+                    editable={true} onChangeText={(text) => this.updateForm({currentOption: text})}/>
+
+                <Icon
+                    raised
+                    color='#f50'
+                    name='plus'
+                    type='font-awesome'
+                    onPress={() => this.addOption()}
+                />
+                {this.renderOptions()}
 
                 <Button	backgroundColor="green"
                            color="white"
@@ -102,9 +170,11 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
                 <Text h2>{this.state.points} points</Text>
                 {this.preview()}
 
-            </View>
+            </ScrollView>
         )
     }
+
+
 
     preview() {
         return <Text h2>The answer is {this.state.isTrue + ""}</Text>
@@ -117,7 +187,7 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
                     title: this.state.title,
                     description: this.state.description,
                     points: this.state.points, type: this.state.info.type,
-                    true: this.state.isTrue})
+                    options: this.convertOptionsToString(this.state.options)})
             .then(newState => this.setQuestionInfo(newState))
     }
 }
