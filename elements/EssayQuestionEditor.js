@@ -26,7 +26,7 @@ export default class EssayQuestionEditor extends React.Component {
         this.setParams(questionId)
         // const questionId = this.state.questionId
         // console.log(questionId)
-        this.questionService.findQuestionById(questionId)
+        this.questionService.findQuestionByTypeAndId(questionId, 'question')
             .then(question => this.setQuestionInfo(question))
     }
 

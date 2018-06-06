@@ -11,10 +11,10 @@ const DEFAULT_TITLE = 'DEFAULT QUESTION TITLE'
 const DEFAULT_DESCRIPTION = 'Default description of this question'
 const DEFAULT_POINTS = '0'
 
-const ESSAY = 'essay'
-const TRUEFALSE = 'truefalse'
-const MC = 'choice'
-const BLANK = 'blanks'
+export const ESSAY = 'essay'
+export const TRUEFALSE = 'truefalse'
+export const MC = 'choice'
+export const BLANK = 'blanks'
 
 
 

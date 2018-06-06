@@ -3,6 +3,7 @@ const REMOTE_URL = 'https://webdev-summer1-2018-tamvu.herokuapp.com'
 const LOCAL_URL = 'http://localhost:8080'
 const QUESTION_API = LOCAL_URL + '/api/question'
 const EXAM_QUESTION_API = LOCAL_URL + '/api/exam/EID'
+const QUESTION_TYPE_API = LOCAL_URL + '/api/TYPE'
 
 
 export default class QuestionService {
@@ -48,13 +49,18 @@ export default class QuestionService {
     }
 
     findQuestionById(id) {
-        console.log(id)
         return fetch(QUESTION_API + '/' + id)
+            .then(response => (response.json()))
+    }
+
+    findQuestionByTypeAndId(id, type) {
+        return fetch(QUESTION_TYPE_API.replace('TYPE', type) + '/' + id)
             .then(response => (response.json()))
     }
 
     updateQuestionById(eid, newQuestion) {
         console.log(newQuestion)
+        console.log(EXAM_QUESTION_API.replace('EID', eid) + '/' + newQuestion.type + '/' + newQuestion.id)
         return fetch(EXAM_QUESTION_API.replace('EID', eid) + '/' + newQuestion.type + '/' + newQuestion.id, {
             method: 'post',
             body: JSON.stringify(newQuestion),
