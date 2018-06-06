@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a1106234-8ffc-4bc6-878a-c6471d2a4066" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elements/ExamWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/elements/ExamWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/QuestionService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/QuestionService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -98,8 +96,8 @@
       <file leaf-file-name="ExamWidget.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/elements/ExamWidget.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="126" column="64" selection-start-line="126" selection-start-column="64" selection-end-line="126" selection-end-column="64" />
+            <state relative-caret-position="248">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -140,6 +138,7 @@
       <find>find</find>
       <find>widgets</find>
       <find>question</find>
+      <find>consol</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -285,7 +284,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40336000" />
+    <option name="totallyTimeSpent" value="40772000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="199" y="23" width="1244" height="812" extended-state="0" />
@@ -693,8 +692,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/ExamWidget.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="126" column="64" selection-start-line="126" selection-start-column="64" selection-end-line="126" selection-end-column="64" />
+        <state relative-caret-position="248">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
