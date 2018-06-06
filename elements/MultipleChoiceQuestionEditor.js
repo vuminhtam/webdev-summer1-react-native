@@ -12,6 +12,7 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
         super(props)
         this.state = {
             currentOption: 'content of new option goes here',
+            correctOption: '0',
             questionId: '',
             info: '',
             title: '',
@@ -40,7 +41,8 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
             title: question.title,
             description: question.description,
             points: question.points,
-            options: this.formatStringToChoices(question.options)})
+            options: this.formatStringToChoices(question.options),
+            correctOption: question.correctOption})
     }
 
     formatStringToChoices(text) {
@@ -73,6 +75,10 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
         this.setState(newState)
     }
 
+    setCorrectOption(id) {
+        this.setState({correctOption: id})
+    }
+
     addOption() {
         console.log('adding new')
         var newState = [...this.state.options, this.state.currentOption]
@@ -92,8 +98,9 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
             function (option, index) {
                 return (
                     <ListItem
+                        onPress={() => self.setCorrectOption(index)}
                         key={index}
-                        title={option}
+                        title={index+1 + '. ' + option}
                         rightIcon={<Icon
                             name='close'
                             type='font-awesome'
@@ -153,6 +160,8 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
                     type='font-awesome'
                     onPress={() => this.addOption()}
                 />
+
+                <Text h2>The correct option: {this.state.correctOption + 1 + ""}</Text>
                 {this.renderOptions()}
 
                 <Button	backgroundColor="green"
