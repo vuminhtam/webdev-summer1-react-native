@@ -12,9 +12,11 @@ import CourseList from './components/CourseList'
 import ModuleList from './components/ModuleList'
 import LessonList from './components/LessonList'
 import WidgetList from './components/WidgetList'
-import QuestionList from './components/QuestionList'
 import TopicList from './components/TopicList'
 import ExamWidget from './elements/ExamWidget'
+import EssayQuestionEditor from './elements/EssayQuestionEditor'
+import FillInBlanksQuestionEditor from './elements/FillInBlanksQuestionEditor'
+
 
 
 class Home extends React.Component {
@@ -70,14 +72,13 @@ const App = createStackNavigator({
     ModuleList,
     LessonList,
     TopicList,
-    AssignmentEditor,
     WidgetList,
-    QuestionList,
+    AssignmentEditor,
+    ExamWidget,
     TrueFalseQuestionEditor,
     MultipleChoiceQuestionEditor,
-    ScreenA,
-    ScreenB,
-    ScreenX, ExamWidget
+    EssayQuestionEditor,
+    FillInBlanksQuestionEditor
 });
 
 export default App;

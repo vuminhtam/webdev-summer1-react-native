@@ -124,6 +124,7 @@ export default class ExamWidget extends Component {
 
     navigateToQuestionByType(question) {
         var navEle = this.navElement[this.state.selectedIndex]
+        console.log(navEle)
         return this.props.navigation.navigate(navEle, {questionId: question.id})
     }
 
