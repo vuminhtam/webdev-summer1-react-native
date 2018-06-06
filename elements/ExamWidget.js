@@ -98,7 +98,7 @@ export default class ExamWidget extends Component {
                             onPress={() => self.navigateToQuestionByType(question)}
                             key={index}
                             subtitle={question.description}
-                            title={question.title}
+                            title={question.id + question.title}
                             rightIcon={<Icon
                                 name='close'
                                 type='font-awesome'
@@ -126,6 +126,7 @@ export default class ExamWidget extends Component {
     navigateToQuestionByType(question) {
         //var navEle = this.navElement[this.state.selectedIndex]
         var navEle = this.questionEditor
+        console.log(question.id)
         return this.props.navigation.navigate(navEle, {questionId: question.id})
     }
 

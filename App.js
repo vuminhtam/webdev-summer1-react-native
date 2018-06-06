@@ -29,7 +29,6 @@ class Home extends React.Component {
     render() {
         return(
             <ScrollView>
-                <BaseQuestionEditor/>
 
                 <StatusBar barStyle="light-content"/>
                 <FixedHeader/>

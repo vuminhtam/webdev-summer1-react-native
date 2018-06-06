@@ -10,7 +10,7 @@ export default class BaseQuestionEditor extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            questionId: '312',
+            questionId: '',
             info: '',
             title: '',
             description: '',
@@ -22,11 +22,11 @@ export default class BaseQuestionEditor extends React.Component {
     }
 
     componentDidMount() {
-        // const {navigation} = this.props;
-        // const questionId = navigation.getParam("questionId")
-        // this.setParams(questionId)
-        console.log(this.state.questionId)
-        const questionId = this.state.questionId
+        const {navigation} = this.props;
+        const questionId = navigation.getParam("questionId")
+        this.setParams(questionId)
+        // const questionId = this.state.questionId
+        // console.log(questionId)
         this.questionService.findQuestionById(questionId)
             .then(question => this.setQuestionInfo(question))
     }
@@ -43,7 +43,6 @@ export default class BaseQuestionEditor extends React.Component {
     }
 
     updateForm(newState) {
-        console.log(newState)
         this.setState(newState)
     }
     render() {
@@ -90,6 +89,7 @@ export default class BaseQuestionEditor extends React.Component {
                 <Text h3>Preview</Text>
                 <Text h2>{this.state.title}</Text>
                 <Text>{this.state.description}</Text>
+                <Text h2>{this.state.points} points</Text>
 
             </View>
         )
