@@ -1,11 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ScrollView } from 'react-native';
 import FixedHeader from './elements/FixedHeader'
-import TextHeadings from './elements/TextHeadings'
-import Icons from './elements/Icons'
-import ExamEditor from './elements/Exam'
-import QuestionTypeButtonGroupChooser from './elements/QuestionTypeButtonGroupChooser'
-import QuestionTypePicker from './elements/QuestionTypePicker'
 import TrueFalseQuestionEditor from './elements/TrueFalseQuestionEditor'
 import MultipleChoiceQuestionEditor from './elements/MultipleChoiceQuestionEditor'
 import AssignmentEditor from './elements/AssignmentEditor'

@@ -34,7 +34,7 @@ class WidgetList extends Component {
     }
 
     setParams(topicId) {
-        this.setState({examId: topicId})
+        this.setState({topicId: topicId})
     }
 
     updateIndex(selectedIndex) {
@@ -68,16 +68,13 @@ class WidgetList extends Component {
     }
 
     findWidgetsByMode(topicId) {
-        // const mode = this.getMode()
         this.getServiceByMode().findAllByTopic(topicId)
-        // const url = "http://localhost:8080/api/topic/" + examId + "/" + mode
-        // fetch(url)
-        //     .then(response => (response.json()))
-            .then(widgets => this.setState({questions: widgets}))
+            .then(widgets => this.setState({widgets: widgets}))
     }
 
 
     renderWidgets() {
+        console.log(this.state)
         let list = null
         var self = this
         if (this.state) {
