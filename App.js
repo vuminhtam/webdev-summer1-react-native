@@ -14,6 +14,7 @@ import LessonList from './components/LessonList'
 import WidgetList from './components/WidgetList'
 import QuestionList from './components/QuestionList'
 import TopicList from './components/TopicList'
+import ExamWidget from './elements/ExamWidget'
 
 
 class Home extends React.Component {
@@ -76,7 +77,7 @@ const App = createStackNavigator({
     MultipleChoiceQuestionEditor,
     ScreenA,
     ScreenB,
-    ScreenX
+    ScreenX, ExamWidget
 });
 
 export default App;

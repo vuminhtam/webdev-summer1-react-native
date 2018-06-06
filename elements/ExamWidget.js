@@ -9,8 +9,13 @@ import QuestionService from "../services/QuestionService";
 
 const DEFAULT_TITLE = 'DEFAULT QUESTION TITLE'
 const DEFAULT_DESCRIPTION = 'Default description of this question'
-const DEFAULT_DESCRIPTION = 'Default description of this question'
 const DEFAULT_POINTS = '0'
+
+const ESSAY = 'essay'
+const TRUEFALSE = 'truefalse'
+const MC = 'choice'
+const BLANK = 'blanks'
+
 
 
 export default class ExamWidget extends Component {
@@ -24,7 +29,7 @@ export default class ExamWidget extends Component {
             examId: ''
         }
         this.buttons = ['Essay', 'True/False', 'Multiple Choice', 'Fill in Blanks']
-        this.mode = ['essay', 'truefalse', 'multichoice', 'blanks']
+        this.mode = [ESSAY, TRUEFALSE, MC, BLANK]
         this.navElement = [
             'EssayQuestionEditor',
             'TrueFalseQuestionEditor',
@@ -129,13 +134,20 @@ export default class ExamWidget extends Component {
     }
 
     createNewWidgetObject() {
-        switch (this.buttons[this.state.selectedIndex]) {
-            case 'Assignments':
-                return {title: 'new assignment', description: 'description', score: '0'};
-            case 'Exams':
-                return {title: 'new quiz', description: 'description for exam'};
+        switch (this.getMode()) {
+            case ESSAY:
+                return {type: this.getMode(), title: 'new essay question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS};
+            case TRUEFALSE:
+                return {type: this.getMode(), title: 'new T/F question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
+                    isTrue: 'true'};
+            case MC:
+                return {type: this.getMode(), title: 'new multiple choice question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
+                    options: 'sampleOption', correctOption: 0};
+            case BLANK:
+                return {type: this.getMode(), title: 'new multiple choice question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
+                    variables: 'sampleBlankAnswer=1'};
             default:
-                return {title: 'new widget'}
+                return {type: this.getMode(), title: 'new base question'}
         }
     }
 

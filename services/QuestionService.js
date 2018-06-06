@@ -29,21 +29,19 @@ export default class QuestionService {
     }
 
     findAllByExamByType(examId, type) {
-        console.log(type)
+        console.log(EXAM_QUESTION_API.replace('EID', examId) + '/' + type)
         return fetch(EXAM_QUESTION_API.replace('EID', examId) + '/' + type)
             .then(response => (response.json()))
     }
 
     addByExam(eid, question, type) {
-        console.log('adding ' + type + ' to ' + ' exam' + tid)
-        // return fetch(EXAM_QUESTION_API.replace('EID', tid), {
-        //     method: 'post',
-        //     body: JSON.stringify({
-        //         title: exam.title,
-        //         widgetType: 'Exam',
-        //         description: exam.description}),
-        //     headers: {
-        //         'content-type': 'application/json'}
-        // }).then(() => alert('Added new exam!'))
+        console.log('adding ' + type + ' to ' + ' exam' + eid)
+        console.log(question)
+        return fetch(EXAM_QUESTION_API.replace('EID', eid) + '/' + type, {
+            method: 'post',
+            body: JSON.stringify(question),
+            headers: {
+                'content-type': 'application/json'}
+        }).then((response) => console.log(response))
     }
 }
