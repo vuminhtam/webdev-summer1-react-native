@@ -26,6 +26,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-fontawesome": "^5.7.0",
     "react-native-multiple-choice": "0.0.8",
+    "react-native-multiple-select-list": "^1.0.4",
     "react-native-tabs": "^1.0.9",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.4"

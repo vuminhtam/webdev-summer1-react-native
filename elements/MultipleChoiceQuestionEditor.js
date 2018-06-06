@@ -4,7 +4,9 @@ import {Text, Button, CheckBox, ListItem, Icon} from 'react-native-elements'
 import {FormLabel, FormInput, FormValidationMessage}
     from 'react-native-elements'
 import QuestionService from "../services/QuestionService";
-import {MC, TRUEFALSE} from "./ExamWidget";
+import {MC, TRUEFALSE} from "./ExamWidget"
+import CustomMultiPicker from "react-native-multiple-select-list";
+
 
 export default class MultipleChoiceQuestionEditor extends React.Component {
     static navigationOptions = { title: "Multiple-Choice Question Editor"}
@@ -149,7 +151,7 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
 
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1,
-                        backgroundColor: 'yellow'}}
+                        backgroundColor: 'white'}}
                     defaultValue={this.state.currentOption}
                     editable={true} onChangeText={(text) => this.updateForm({currentOption: text})}/>
 
@@ -186,7 +188,22 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
 
 
     preview() {
-        return <Text h2>The answer is {this.state.isTrue + ""}</Text>
+        return <CustomMultiPicker
+            options={this.state.options}
+            multiple={false} //
+            placeholderTextColor={'#757575'}
+            returnValue={"label"} // label or value
+            callback={(res)=>{ console.log(res) }} // callback, array of selected items
+            rowBackgroundColor={"#eee"}
+            rowHeight={40}
+            rowRadius={5}
+            iconColor={"#00a2dd"}
+            iconSize={30}
+            selectedIconName={"ios-checkmark-circle-outline"}
+            unselectedIconName={"ios-radio-button-off-outline"}
+            scrollViewHeight={130}
+            selected={[0]}
+        />
     }
 
     save() {
