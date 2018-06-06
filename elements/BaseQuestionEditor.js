@@ -14,8 +14,7 @@ export default class BaseQuestionEditor extends React.Component {
             info: '',
             title: '',
             description: '',
-            points: '',
-            options: ''
+            points: ''
         }
 
         this.questionService = QuestionService.instance

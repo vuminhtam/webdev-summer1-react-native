@@ -15,6 +15,7 @@ import TopicList from './components/TopicList'
 import ExamWidget from './elements/ExamWidget'
 import FillInBlanksQuestionEditor from './elements/FillInBlanksQuestionEditor'
 import BaseQuestionEditor from './elements/BaseQuestionEditor'
+import EssayQuestionEditor from "./elements/EssayQuestionEditor";
 
 
 
@@ -28,7 +29,7 @@ class Home extends React.Component {
     render() {
         return(
             <ScrollView>
-
+                <EssayQuestionEditor/>
                 <StatusBar barStyle="light-content"/>
                 <FixedHeader/>
                 <Button title="Topics"
