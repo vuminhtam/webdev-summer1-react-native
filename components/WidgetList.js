@@ -74,7 +74,6 @@ class WidgetList extends Component {
 
 
     renderWidgets() {
-        console.log(this.state)
         let list = null
         var self = this
         if (this.state) {
