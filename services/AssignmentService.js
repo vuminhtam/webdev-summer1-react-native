@@ -35,10 +35,11 @@ class AssignmentService {
             body: JSON.stringify({
                 title: assignment.title,
                 widgetType: 'Assignment',
-                description: assignment.description, score:
-                assignment.score}),
+                description: assignment.description,
+                score: assignment.score}),
             headers: {
                 'content-type': 'application/json'}
-        }).then(() => alert('Added new assignment!'))
+        }).then(response => (response.json()))
+
     }
 }

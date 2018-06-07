@@ -39,7 +39,7 @@ class WidgetService {
         }).then(() => alert('Changes saved!'))
     }
 
-    deleteWidgetById(id) {
+    deleteById(id) {
         return fetch(WIDGET_API + '/' + id, {method: 'DELETE'})
             .then(response => (response.json()))
     }

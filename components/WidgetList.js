@@ -84,7 +84,7 @@ class WidgetList extends Component {
                                 onPress={() => self.getNavigateOnMode(widget)}
                                 key={index}
                                 subtitle={widget.description}
-                                title={widget.title}
+                                title={[widget.id] + widget.title}
                                 rightIcon={<Icon
                                     name='close'
                                     type='font-awesome'
@@ -101,7 +101,7 @@ class WidgetList extends Component {
 
     deleteWidget(widget) {
         this.widgetService.deleteById(widget.id)
-            .then(() => this.findWidgets(this.state.topicId))
+            .then(() => this.findWidgetsByMode(this.state.topicId))
         alert('refresh')
     }
 
@@ -132,7 +132,10 @@ class WidgetList extends Component {
         this.getServiceByMode()
             .addByTopic(this.state.topicId,
                 this.createNewWidgetObject())
-            .then(() => this.findWidgets(this.state.topicId))
+            .then((newWidget) => {
+                console.log(newWidget)
+                this.findWidgetsByMode(this.state.topicId)
+            })
     }
 
     getServiceByMode() {
