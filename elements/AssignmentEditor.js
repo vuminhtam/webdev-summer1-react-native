@@ -31,7 +31,9 @@ export default class AssignmentEditor extends React.Component {
         return(
             <ScrollView>
                 <FormLabel>Assignment Title</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.title}
+                    onChangeText={
                     text => this.updateForm({title: text})
                 }/>
                 <FormValidationMessage>
@@ -39,7 +41,9 @@ export default class AssignmentEditor extends React.Component {
                 </FormValidationMessage>
 
                 <FormLabel>Description</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.description}
+                    onChangeText={
                     text => this.updateForm({description: text})
                 }/>
 
@@ -48,7 +52,9 @@ export default class AssignmentEditor extends React.Component {
                 </FormValidationMessage>
 
                 <FormLabel>Score</FormLabel>
-                <FormInput onChangeText={
+                <FormInput
+                    defaultValue={this.state.score + ""}
+                    onChangeText={
                     text => this.updateForm({score: text})
                 }/>
 
@@ -75,12 +81,12 @@ export default class AssignmentEditor extends React.Component {
                     style={{padding:10, height: 100, borderColor: 'gray', borderWidth: 1,
                         backgroundColor: 'white'}}
                     value='Essay answer by student'
-                    editable={false}/>
+                    editable={true}/>
                 <TextInput
                     style={{padding:10, height: 40, borderColor: 'gray', borderWidth: 1,
                         backgroundColor: 'white'}}
                     value='Student submit a link'
-                    editable={false}/>
+                    editable={true}/>
                 <Button	backgroundColor="white"
                            color="black"
                            title="Upload a file"
