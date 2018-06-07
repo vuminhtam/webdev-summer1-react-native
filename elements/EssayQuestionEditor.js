@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, TextInput} from 'react-native'
+import {ScrollView, TextInput} from 'react-native'
 import {Text, Button, CheckBox} from 'react-native-elements'
 import {FormLabel, FormInput, FormValidationMessage}
     from 'react-native-elements'
@@ -47,7 +47,7 @@ export default class EssayQuestionEditor extends React.Component {
     }
     render() {
         return(
-            <View>
+            <ScrollView>
                 <FormLabel>Title</FormLabel>
                 <FormInput
                     defaultValue={this.state.title}
@@ -93,7 +93,7 @@ export default class EssayQuestionEditor extends React.Component {
                 <Text>{this.state.description}</Text>
                 {this.preview()}
 
-            </View>
+            </ScrollView>
         )
     }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, TextInput} from 'react-native'
+import {ScrollView, TextInput} from 'react-native'
 import {Text, Button, CheckBox} from 'react-native-elements'
 import {FormLabel, FormInput, FormValidationMessage}
     from 'react-native-elements'
@@ -51,7 +51,7 @@ export default class TrueFalseQuestionEditor extends React.Component {
     }
     render() {
         return(
-            <View>
+            <ScrollView>
                 <Text h3>{this.state.questionId}</Text>
                 <FormLabel>Title</FormLabel>
                 <FormInput
@@ -100,7 +100,7 @@ export default class TrueFalseQuestionEditor extends React.Component {
                 <Text h2>{this.state.title} - {this.state.points} points</Text>
                 <Text>{this.state.description}</Text>
                 {this.preview()}
-            </View>
+            </ScrollView>
         )
     }
 
