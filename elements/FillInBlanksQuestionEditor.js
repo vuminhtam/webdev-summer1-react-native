@@ -51,33 +51,9 @@ export default class FillInBlanksQuestionEditor extends React.Component {
         this.setState(newState)
     }
 
-
-    // renderOptions() {
-    //     var self = this
-    //     return this.state.options.map(
-    //         function (option, index) {
-    //             return (
-    //                 <ListItem
-    //                     onPress={() => self.setCorrectOption(index)}
-    //                     key={index}
-    //                     title={index+1 + '. ' + option}
-    //                     rightIcon={<Icon
-    //                         name='close'
-    //                         type='font-awesome'
-    //                         color='#517fa4'
-    //                         onPress={() => self.deleteOption(index)}
-    //                     />}
-    //                 />
-    //             )
-    //         }
-    //     )
-    // }
-
     render() {
         return(
             <ScrollView>
-                {this.preview()}
-
                 <Text h3>{this.state.questionId}</Text>
                 <FormLabel>Title</FormLabel>
                 <FormInput
@@ -128,10 +104,9 @@ export default class FillInBlanksQuestionEditor extends React.Component {
                            onPress={() => this.props.navigation.goBack()}/>
 
                 <Text h3>Preview</Text>
-                <Text h2>{this.state.title}</Text>
+                <Text h2>{this.state.title} - {this.state.points} points</Text>
                 <Text>{this.state.description}</Text>
-                <Text h2>{this.state.points} points</Text>
-
+                {this.preview()}
             </ScrollView>
         )
     }

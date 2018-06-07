@@ -175,10 +175,10 @@ export default class MultipleChoiceQuestionEditor extends React.Component {
                            title="Cancel"
                            onPress={() => this.props.navigation.goBack()}/>
 
+
                 <Text h3>Preview</Text>
-                <Text h2>{this.state.title}</Text>
+                <Text h2>{this.state.title} - {this.state.points} points</Text>
                 <Text>{this.state.description}</Text>
-                <Text h2>{this.state.points} points</Text>
                 {this.preview()}
 
             </ScrollView>
