@@ -39,15 +39,20 @@ class WidgetList extends Component {
 
     updateIndex(selectedIndex) {
         this.setState({selectedIndex: selectedIndex})
-        this.findWidgetsByMode(this.state.topicId)
+        this.findWidgetsByMode(this.state.topicId, selectedIndex)
     }
+
+    // updateIndex(selectedIndex) {
+    //     this.setState({selectedIndex: selectedIndex})
+    //     //this.findWidgetsByMode(this.state.topicId)
+    // }
 
     render() {
         return (
             <ScrollView style={{padding: 15}}>
 
                 <ButtonGroup
-                    onPress={this.updateIndex}
+                    onPress={(i) => {this.updateIndex(i)}}
                     selectedIndex={this.state.selectedIndex}
                     buttons={this.buttons}
                     containerStyle={{height: 100}}
@@ -67,8 +72,13 @@ class WidgetList extends Component {
         )
     }
 
-    findWidgetsByMode(topicId) {
-        this.getServiceByMode().findAllByTopic(topicId)
+    // findWidgetsByMode(topicId) {
+    //     this.getServiceByMode().findAllByTopic(topicId)
+    //         .then(widgets => this.setState({widgets: widgets}))
+    // }
+
+    findWidgetsByMode(topicId, type) {
+        this.getServiceByMode(type).findAllByTopic(topicId)
             .then(widgets => this.setState({widgets: widgets}))
     }
 
@@ -138,8 +148,9 @@ class WidgetList extends Component {
             })
     }
 
-    getServiceByMode() {
-        switch (this.buttons[this.state.selectedIndex]) {
+    getServiceByMode(type) {
+        console.log(type)
+        switch (this.buttons[type]) {
             case 'Assignments':
                 return AssignmentService.instance;
             case 'Exams':
@@ -148,6 +159,17 @@ class WidgetList extends Component {
                 return AssignmentService.instance
         }
     }
+
+    // getServiceByMode() {
+    //     switch (this.buttons[this.state.selectedIndex]) {
+    //         case 'Assignments':
+    //             return AssignmentService.instance;
+    //         case 'Exams':
+    //             return ExamService.instance;
+    //         default:
+    //             return AssignmentService.instance
+    //     }
+    // }
 
     createNewWidgetObject() {
         switch (this.buttons[this.state.selectedIndex]) {

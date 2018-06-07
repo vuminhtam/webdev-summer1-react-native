@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1106234-8ffc-4bc6-878a-c6471d2a4066" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/WidgetList.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/WidgetList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elements/EssayQuestionEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/elements/EssayQuestionEditor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elements/ExamWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/elements/ExamWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/AssignmentService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/AssignmentService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/WidgetService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/WidgetService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,8 +20,8 @@
       <file leaf-file-name="WidgetList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/WidgetList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="103" column="47" selection-start-line="103" selection-start-column="47" selection-end-line="103" selection-end-column="47" />
+            <state relative-caret-position="195">
+              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -54,8 +50,8 @@
       <file leaf-file-name="ExamWidget.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/elements/ExamWidget.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="131" column="20" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
+            <state relative-caret-position="196">
+              <caret line="127" selection-start-line="127" selection-end-line="127" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -163,6 +159,9 @@
       <find>inputVa</find>
       <find>variable</find>
       <find>format</find>
+      <find>type</find>
+      <find>updatety</find>
+      <find>update</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,9 +200,9 @@
         <option value="$PROJECT_DIR$/elements/AssignmentEditor.js" />
         <option value="$PROJECT_DIR$/elements/BaseQuestionEditor.js" />
         <option value="$PROJECT_DIR$/elements/EssayQuestionEditor.js" />
-        <option value="$PROJECT_DIR$/elements/ExamWidget.js" />
         <option value="$PROJECT_DIR$/services/AssignmentService.js" />
         <option value="$PROJECT_DIR$/services/WidgetService.js" />
+        <option value="$PROJECT_DIR$/elements/ExamWidget.js" />
         <option value="$PROJECT_DIR$/components/WidgetList.js" />
       </list>
     </option>
@@ -307,7 +306,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69233000" />
+    <option name="totallyTimeSpent" value="70424000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="28" y="23" width="1244" height="812" extended-state="0" />
@@ -671,8 +670,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elements/ExamWidget.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="131" column="20" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
+        <state relative-caret-position="196">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
@@ -681,8 +680,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/WidgetList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="103" column="47" selection-start-line="103" selection-start-column="47" selection-end-line="103" selection-end-column="47" />
+        <state relative-caret-position="195">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
