@@ -149,7 +149,6 @@ class WidgetList extends Component {
     }
 
     getServiceByMode(type) {
-        console.log(type)
         switch (this.buttons[type]) {
             case 'Assignments':
                 return AssignmentService.instance;

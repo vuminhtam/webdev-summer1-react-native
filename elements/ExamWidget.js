@@ -44,7 +44,7 @@ export default class ExamWidget extends Component {
         const {navigation} = this.props;
         const eid = navigation.getParam("examId")
         this.setParams(eid)
-        this.findQuestionsByType(eid)
+        this.findWidgetsByMode(eid)
     }
 
     setParams(eid) {
@@ -53,7 +53,7 @@ export default class ExamWidget extends Component {
 
     updateIndex(selectedIndex) {
         this.setState({selectedIndex: selectedIndex})
-        this.findQuestionsByType(this.state.examId)
+        this.findWidgetsByMode(this.state.examId, selectedIndex)
     }
 
     render() {
@@ -81,8 +81,9 @@ export default class ExamWidget extends Component {
         )
     }
 
-    findQuestionsByType(eid) {
-        this.questionService.findAllByExamByType(eid, this.getMode())
+    findWidgetsByMode(eid, type) {
+        this.questionService
+            .findAllByExamByType(eid, this.getMode(type))
             .then(widgets => this.setState({questions: widgets}))
     }
 
@@ -115,11 +116,14 @@ export default class ExamWidget extends Component {
 
     deleteWidget(widget) {
         this.questionService.deleteById(widget.id)
-            .then(() => this.findQuestionsByType(this.state.examId))
+            .then(() => this.findWidgetsByMode(this.state.examId))
         alert('refresh')
     }
 
-    getMode() {
+    getMode(type) {
+        if(type != undefined) {
+            return this.mode[type]
+        }
         return this.mode[this.state.selectedIndex]
     }
 
@@ -131,7 +135,7 @@ export default class ExamWidget extends Component {
     addQuestionToExam() {
         this.questionService
             .addByExam(this.state.examId, this.createNewWidgetObject(), this.getMode())
-            .then(() => this.findQuestionsByType(this.state.examId))
+            .then(() => this.findWidgetsByMode(this.state.examId))
     }
 
     createNewWidgetObject() {

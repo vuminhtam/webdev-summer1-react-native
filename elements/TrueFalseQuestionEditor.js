@@ -35,7 +35,6 @@ export default class TrueFalseQuestionEditor extends React.Component {
 
     setQuestionInfo(question) {
         this.setState({info: question})
-        console.log(question)
         this.setState({questionId: question.id,
             title: question.title,
             description: question.description,
