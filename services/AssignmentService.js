@@ -1,8 +1,8 @@
 let _singleton = Symbol();
 const REMOTE_URL = 'https://webdev-summer1-2018-tamvu.herokuapp.com'
 const LOCAL_URL = 'http://localhost:8080'
-const ASSIGNMENT_API = LOCAL_URL + '/api/assignment'
-const TOPIC_ASSIGNMENT_API = LOCAL_URL + '/api/topic/TID/assignment'
+const ASSIGNMENT_API = REMOTE_URL + '/api/assignment'
+const TOPIC_ASSIGNMENT_API = REMOTE_URL + '/api/topic/TID/assignment'
 
 
 export default

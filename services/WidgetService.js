@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 const REMOTE_URL = 'https://webdev-summer1-2018-tamvu.herokuapp.com'
 const LOCAL_URL = 'http://localhost:8080'
-const WIDGET_API = LOCAL_URL + '/api/widget'
+const WIDGET_API = REMOTE_URL + '/api/widget'
 
 
 export default

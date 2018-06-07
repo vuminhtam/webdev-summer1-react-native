@@ -1,9 +1,9 @@
 let _singleton = Symbol();
 const REMOTE_URL = 'https://webdev-summer1-2018-tamvu.herokuapp.com'
 const LOCAL_URL = 'http://localhost:8080'
-const QUESTION_API = LOCAL_URL + '/api/question'
-const EXAM_QUESTION_API = LOCAL_URL + '/api/exam/EID'
-const QUESTION_TYPE_API = LOCAL_URL + '/api/TYPE'
+const QUESTION_API = REMOTE_URL + '/api/question'
+const EXAM_QUESTION_API = REMOTE_URL + '/api/exam/EID'
+const QUESTION_TYPE_API = REMOTE_URL + '/api/TYPE'
 
 
 export default class QuestionService {
