@@ -17,19 +17,19 @@ class TopicList extends Component {
 
     componentDidMount() {
 
-        // const {navigation} = this.props;
-        // const courseId = navigation.getParam("courseId")
-        // const moduleId = navigation.getParam("moduleId")
-        // const lessonId = navigation.getParam("lessonId")
-        // const url = "http://localhost:8080/api/course/"+courseId
-        //     +"/module/"+moduleId
-        //     +"/lesson/"+lessonId
-        //     +"/topic"
-
-        const url = "http://localhost:8080/api/course/"+2
-            +"/module/"+232
-            +"/lesson/"+322
+        const {navigation} = this.props;
+        const courseId = navigation.getParam("courseId")
+        const moduleId = navigation.getParam("moduleId")
+        const lessonId = navigation.getParam("lessonId")
+        const url = "http://localhost:8080/api/course/"+courseId
+            +"/module/"+moduleId
+            +"/lesson/"+lessonId
             +"/topic"
+
+        // const url = "http://localhost:8080/api/course/"+2
+        //     +"/module/"+232
+        //     +"/lesson/"+322
+        //     +"/topic"
         fetch(url)
             .then(response => (response.json()))
             .then(topics => this.setState({topics: topics}))

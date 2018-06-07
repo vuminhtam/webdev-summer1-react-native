@@ -20,7 +20,7 @@ export default class AssignmentEditor extends React.Component {
     }
 
     save() {
-      this.assignmentService.saveAssignment(this.state)
+      this.assignmentService.saveWidgetById(this.state)
     }
 
     updateForm(newState) {

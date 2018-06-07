@@ -31,9 +31,6 @@ class Home extends React.Component {
             <ScrollView>
                 <StatusBar barStyle="light-content"/>
                 <FixedHeader/>
-                <Button title="Topics"
-                        onPress={() => this.props.navigation
-                            .navigate('TopicList')} />
                 <Button title="Courses"
                         onPress={() => this.props.navigation
                             .navigate('CourseList')} />
