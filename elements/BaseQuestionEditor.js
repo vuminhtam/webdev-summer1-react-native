@@ -10,6 +10,7 @@ export default class BaseQuestionEditor extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            examId: '',
             questionId: '',
             info: '',
             title: '',
@@ -23,7 +24,8 @@ export default class BaseQuestionEditor extends React.Component {
     componentDidMount() {
         const {navigation} = this.props;
         const questionId = navigation.getParam("questionId")
-        this.setParams(questionId)
+        const examId = navigation.getParam("examId")
+        this.setParams(questionId, examId)
         // const questionId = this.state.questionId
         // console.log(questionId)
         this.questionService.findQuestionById(questionId)
@@ -37,13 +39,15 @@ export default class BaseQuestionEditor extends React.Component {
         this.setState({questionId: question.id, title: question.title, description: question.description, points: question.points})
     }
 
-    setParams(id) {
+    setParams(id, examId) {
         this.setState({questionId: id})
+        this.setState({examId: examId})
     }
 
     updateForm(newState) {
         this.setState(newState)
     }
+
     render() {
         return(
             <View>
@@ -95,7 +99,7 @@ export default class BaseQuestionEditor extends React.Component {
 
     save() {
         this.questionService
-            .updateQuestionById(4462,
+            .updateQuestionById(this.state.examId,
                 {id: this.state.questionId,
                     title: this.state.title,
                     description: this.state.description,
