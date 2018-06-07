@@ -78,7 +78,9 @@ class WidgetList extends Component {
     // }
 
     findWidgetsByMode(topicId, type) {
-        this.getServiceByMode(type).findAllByTopic(topicId)
+        console.log(topicId)
+        this.getServiceByMode(type)
+            .findAllByTopic(topicId)
             .then(widgets => this.setState({widgets: widgets}))
     }
 
@@ -109,12 +111,6 @@ class WidgetList extends Component {
         return list
     }
 
-    deleteWidget(widget) {
-        this.widgetService.deleteById(widget.id)
-            .then(() => this.findWidgetsByMode(this.state.topicId))
-        alert('refresh')
-    }
-
     getMode() {
         switch (this.buttons[this.state.selectedIndex]) {
             case 'Assignments':
@@ -138,17 +134,27 @@ class WidgetList extends Component {
         }
     }
 
+    deleteWidget(widget) {
+        this.widgetService
+            .deleteById(widget.id)
+            .then(() => this.findWidgetsByMode(this.state.topicId))
+    }
+
     addWidgetToTopic() {
         this.getServiceByMode()
-            .addByTopic(this.state.topicId,
-                this.createNewWidgetObject())
+            .addByTopic(this.state.topicId, this.createNewWidgetObject())
             .then((newWidget) => {
-                console.log(newWidget)
                 this.findWidgetsByMode(this.state.topicId)
             })
     }
 
     getServiceByMode(type) {
+        if(type === undefined) {
+            type = this.state.selectedIndex
+        }
+
+        console.log(type)
+
         switch (this.buttons[type]) {
             case 'Assignments':
                 return AssignmentService.instance;

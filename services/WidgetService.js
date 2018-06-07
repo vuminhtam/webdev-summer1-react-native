@@ -29,6 +29,5 @@ class WidgetService {
 
     deleteById(id) {
         return fetch(WIDGET_API + '/' + id, {method: 'DELETE'})
-            .then(response => (response.json()))
     }
 }
