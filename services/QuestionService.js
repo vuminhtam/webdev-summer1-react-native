@@ -59,8 +59,6 @@ export default class QuestionService {
     }
 
     updateQuestionById(eid, newQuestion) {
-        console.log(newQuestion)
-        console.log(EXAM_QUESTION_API.replace('EID', eid) + '/' + newQuestion.type + '/' + newQuestion.id)
         return fetch(EXAM_QUESTION_API.replace('EID', eid) + '/' + newQuestion.type + '/' + newQuestion.id, {
             method: 'post',
             body: JSON.stringify(newQuestion),

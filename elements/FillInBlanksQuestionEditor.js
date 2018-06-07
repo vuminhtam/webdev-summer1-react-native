@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, TextInput} from 'react-native'
+import {ScrollView, View, TextInput} from 'react-native'
 import {Text, Button, CheckBox, ListItem, Icon} from 'react-native-elements'
 import {FormLabel, FormInput, FormValidationMessage}
     from 'react-native-elements'
@@ -7,6 +7,7 @@ import QuestionService from "../services/QuestionService";
 import {BLANK, MC, TRUEFALSE} from "./ExamWidget"
 import CustomMultiPicker from "react-native-multiple-select-list";
 
+const reactStringReplace = require('react-string-replace')
 
 export default class FillInBlanksQuestionEditor extends React.Component {
     static navigationOptions = { title: "Fill-in-Blanks Question Editor"}
@@ -75,6 +76,8 @@ export default class FillInBlanksQuestionEditor extends React.Component {
     render() {
         return(
             <ScrollView>
+                {this.preview()}
+
                 <Text h3>{this.state.questionId}</Text>
                 <FormLabel>Title</FormLabel>
                 <FormInput
@@ -107,6 +110,7 @@ export default class FillInBlanksQuestionEditor extends React.Component {
                 </FormValidationMessage>
 
                 <TextInput
+                    multiline={true}
                     style={{height: 100, borderColor: 'gray', borderWidth: 1,
                         backgroundColor: 'white'}}
                     defaultValue={this.state.variables}
@@ -127,7 +131,6 @@ export default class FillInBlanksQuestionEditor extends React.Component {
                 <Text h2>{this.state.title}</Text>
                 <Text>{this.state.description}</Text>
                 <Text h2>{this.state.points} points</Text>
-                {this.preview()}
 
             </ScrollView>
         )
@@ -146,26 +149,21 @@ export default class FillInBlanksQuestionEditor extends React.Component {
             style={{height: 30, width: 60, borderColor: 'gray', borderWidth: 0, backgroundColor: 'white'}}
             editable={true}
             value={""}/>
-        var myStr = '2 + 2 = [four=4] \n [two=2] + 2 = 4\n'
-        var result = myStr.match(/\[.*?\]/igm)
-
-        var reg = /\[.*?\]/igm
-        var blankStr = reactStringReplace(myStr, /\[.*?\]/igm, () => (blank))
-        console.log(blankStr)
-        return blankStr.map((ele) => this.format(ele, key++))
-        // return <Text>{reactStringReplace('hey hey you', /(hey)/g, () => <Text>uuu</Text>)}<Text/>
-        //
-        // // return <Text h1>{myStr.replace(result[0], blank)}</Text>
-        // // return <Text h1>{this.state.variables.replace(result[0], "hi")}</Text>
+        var myStr = this.state.variables
+        var reg = /\[(.*?)\]/igm
+        var blankStr = reactStringReplace(myStr, reg, (match) => (this.getBlank(match)))
+        return <Text>{blankStr.map((ele) => this.format(ele, key++))}</Text>
     }
 
     format(ele, key) {
-        if(ele.type === undefined) {
-            return <Text key={key} h3>{ele}</Text>
-        }
-        else {
-            return ele
-        }
+        return ele
+    }
+
+    getBlank(match) {
+        return <View>
+            <TextInput
+            style={{height: 30, width: 100, borderColor: 'gray', borderWidth: 0, backgroundColor: 'white'}}
+            editable={true}/></View>
     }
 
     save() {

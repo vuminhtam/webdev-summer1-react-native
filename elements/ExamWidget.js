@@ -147,7 +147,8 @@ export default class ExamWidget extends Component {
                     options: 'sampleOption', correctOption: 0};
             case BLANK:
                 return {type: this.getMode(), title: 'new fill-in-blank question', description: DEFAULT_DESCRIPTION, score: DEFAULT_POINTS,
-                    variables: 'sampleBlankAnswer=1'};
+                    variables: '2 + 2 = [four=4]\n' +
+                    '[two=2] + 2 = 4\n'};
             default:
                 return {type: this.getMode(), title: 'new base question'}
         }
